@@ -152,8 +152,16 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Keybind for one-click run using Makefiles
 -- F5 to run "make"
-vim.keymap.set('n', '<F5>', ':!make\n', { desc = 'Run Makefile option.' })
-vim.keymap.set('n', '<F6>', ':!make debug\n', { desc = 'Run and debug Makefile option.' })
+local make = {
+  run = function()
+    vim.cmd '!make'
+  end,
+  debug = function()
+    vim.cmd '!make debug'
+  end,
+}
+vim.keymap.set('n', '<F5>', make.run, { desc = 'Run Makefile option.' })
+vim.keymap.set('n', '<F6>', make.debug, { desc = 'Run and debug Makefile option.' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -195,6 +203,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-fugitive',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
