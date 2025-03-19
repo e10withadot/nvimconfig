@@ -152,8 +152,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Keybind for one-click run using Makefiles
 -- F5 to run "make"
-vim.keymap.set('n', '<F5>', ':!make\n', { desc = 'Run default Makefile' })
-vim.keymap.set('n', '<F6>', ':!make debug\n', { desc = 'Run default Makefile' })
+vim.keymap.set('n', '<F5>', ':!make\n', { desc = 'Run Makefile option.' })
+vim.keymap.set('n', '<F6>', ':!make debug\n', { desc = 'Run and debug Makefile option.' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
