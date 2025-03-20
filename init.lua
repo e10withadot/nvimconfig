@@ -58,12 +58,12 @@ require('lazy').setup(
     { import = 'plugins' },
     -- ADDITIONAL KICKSTART.NVIM PLUGINS --
     --
-    -- require 'kickstart.plugins.debug',
-    -- require 'kickstart.plugins.indent_line',
-    -- require 'kickstart.plugins.lint',
-    -- require 'kickstart.plugins.autopairs',
-    -- require 'kickstart.plugins.neo-tree',
-    -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+    -- require 'plugins.optional.debug',
+    -- require 'plugins.optional.indent_line',
+    -- require 'plugins.optional.lint',
+    -- require 'plugins.optional.autopairs',
+    -- require 'plugins.optional.neo-tree',
+    -- require 'plugins.optional.gitsigns', -- adds gitsigns recommend keymaps
   },
 
   -- PLUGIN FORMAT HELP: `:help lazy.nvim-🔌-plugin-spec`
