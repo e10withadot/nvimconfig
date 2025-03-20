@@ -35,5 +35,22 @@ return { -- Autocompletion
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lsp-signature-help',
   },
-  config = require 'plugins.nvim-cmp.config',
+  config = function()
+    -- See `:help cmp`
+    local cmp = require 'cmp'
+    local luasnip = require 'luasnip'
+    luasnip.config.setup {}
+
+    cmp.setup {
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      completion = { completeopt = 'menu,menuone,noinsert' },
+
+      mapping = { require 'plugins.nvim-cmp.mapping' },
+      sources = require 'plugins.nvim-cmp.sources',
+    }
+  end,
 }
