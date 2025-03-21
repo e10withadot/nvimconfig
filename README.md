@@ -8,6 +8,8 @@ LUA/NEOVIM INTEGRATION:
 - (or HTML version): https://neovim.io/doc/user/lua-guide.html
 LEADER KEY:
 - See `:help mapleader`
+WINDOW COMMANDS:
+- See `:help wincmd`
 SETTINGS OPTIONS:
 - See `:help vim.opt`
 - Option list: `:help option-list`

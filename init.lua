@@ -1,21 +1,9 @@
-local config_dir = vim.fn.stdpath 'config' .. '/lua/'
-package.path = config_dir .. '?.lua;' .. package.path
-
-local vimopts = require 'vim-opts'
-local keymaps = require 'keymaps'
-local autocmd = require 'autocmd'
-
--- Set <space> as the leader key
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+require 'keymaps'
+require 'vim-opts'
+require 'autocmd'
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
--- call vim options, generic keymaps, and autocommands
-vimopts()
-keymaps()
-autocmd()
 
 -- Install lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
