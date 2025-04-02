@@ -4,7 +4,7 @@ return function()
   vim.diagnostic.config {
     severity_sort = true,
     float = { border = 'rounded', source = 'if_many' },
-    underline = { severity = vim.diagnostic.severity.ERROR },
+    underline = {},
     signs = vim.g.have_nerd_font and {
       text = {
         [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -27,4 +27,10 @@ return function()
       end,
     },
   }
+  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+    group = vim.api.nvim_create_augroup('float_diagnostic_cursor', { clear = true }),
+    callback = function()
+      vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' })
+    end,
+  })
 end

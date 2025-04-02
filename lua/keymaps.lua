@@ -36,10 +36,10 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- F6 to run and debug via "make"
 local make = {
   run = function()
-    vim.cmd '!make'
+    vim.cmd 'make'
   end,
   debug = function()
-    vim.cmd '!make debug'
+    vim.cmd 'make debug'
   end,
 }
 vim.keymap.set('n', '<F5>', make.run, { desc = 'Run Makefile option.' })
