@@ -33,14 +33,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Keybind for one-click run using Makefiles
 -- F5 to run "make"
--- F6 to run and debug via "make"
-local make = {
-  run = function()
-    vim.cmd 'make'
-  end,
-  debug = function()
-    vim.cmd 'make debug'
-  end,
-}
-vim.keymap.set('n', '<F5>', make.run, { desc = 'Run Makefile option.' })
-vim.keymap.set('n', '<F6>', make.debug, { desc = 'Run and debug Makefile option.' })
+-- Shift+F5 to run and debug via "make"
+vim.keymap.set('n', '<F5>', ':sp | term<CR>Amake run<CR>', { desc = 'Run Makefile option.' })
+vim.keymap.set('n', '<S-F5>', ':sp | term<CR>Amake debug<CR>', { desc = 'Run and debug Makefile option.' })

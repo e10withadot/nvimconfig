@@ -20,6 +20,8 @@ end)
 
 -- Enable break indent
 vim.opt.breakindent = true
+-- Enable Cindent
+vim.opt.cin = true
 
 -- Save undo history
 vim.opt.undofile = true
