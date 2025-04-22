@@ -9,12 +9,12 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Open builtin terminal
+vim.keymap.set('n', '<leader>t', ':sp | term<CR>', { desc = 'Open terminal split' })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-q>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 vim.keymap.set('n', '<leader>ex', ':Ex<CR>', { desc = 'Open netrw in current working directory' })
 
@@ -33,6 +33,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Keybind for one-click run using Makefiles
 -- F5 to run "make"
--- Shift+F5 to run and debug via "make"
-vim.keymap.set('n', '<F5>', ':sp | term<CR>Amake run<CR>', { desc = 'Run Makefile option.' })
-vim.keymap.set('n', '<S-F5>', ':sp | term<CR>Amake debug<CR>', { desc = 'Run and debug Makefile option.' })
+-- F6 to run and debug via "make"
+vim.keymap.set('n', '<F5>', '<cmd>sp | term<CR>Amake run<CR>', { desc = 'Run Makefile option' })
+vim.keymap.set('n', '<F6>', '<cmd>sp | term<CR>Amake debug<CR>', { desc = 'Run and debug Makefile option' })
