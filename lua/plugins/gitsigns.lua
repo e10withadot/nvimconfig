@@ -11,5 +11,12 @@ return {
         changedelete = { text = '~' },
       },
     },
+    config = function()
+      -- set colors before calling setup
+      vim.cmd [[ highlight GitSignsAdd guifg=green ]]
+      vim.cmd [[ highlight GitSignsChange guifg=yellow ]]
+      vim.cmd [[ highlight GitSignsDelete guifg=red ]]
+      require('gitsigns').setup()
+    end,
   },
 }
