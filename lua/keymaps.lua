@@ -16,7 +16,7 @@ vim.keymap.set('n', '<leader>t', ':sp | term<CR>', { desc = 'Open terminal split
 -- is not what someone will guess without a bit more experience.
 vim.keymap.set('t', '<C-q>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set('n', '<leader>ex', ':Ex<CR>', { desc = 'Open netrw in current working directory' })
+vim.keymap.set('n', '<leader>e', ':Ex<CR>', { desc = 'Open netrw in current working directory' })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
