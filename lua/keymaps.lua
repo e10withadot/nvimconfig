@@ -30,6 +30,8 @@ vim.keymap.set('n', 'j', 'jzz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', 'G', 'Gzz')
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
 
 -- Keybinds to make split navigation easier.
 --  Use Ctrl+<hjkl> to switch between windows
