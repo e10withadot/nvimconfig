@@ -25,13 +25,24 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Put cursor in middle
-vim.keymap.set('n', 'k', 'kzz')
-vim.keymap.set('n', 'j', 'jzz')
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', 'G', 'Gzz')
-vim.keymap.set('n', 'n', 'nzz')
-vim.keymap.set('n', 'N', 'Nzz')
+vim.keymap.set({ 'n', 'v' }, 'k', function()
+  return (vim.v.count > 0 and vim.v.count or '') .. 'kzz'
+end, { expr = true })
+vim.keymap.set({ 'n', 'v' }, 'j', function()
+  return (vim.v.count > 0 and vim.v.count or '') .. 'jzz'
+end, { expr = true })
+vim.keymap.set({ 'n', 'v' }, 'u', function()
+  return (vim.v.count > 0 and vim.v.count or '') .. 'uzz'
+end, { expr = true })
+vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
+vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
+vim.keymap.set({ 'n', 'v' }, 'G', 'Gzz')
+vim.keymap.set({ 'n', 'v' }, 'n', 'nzzzv')
+vim.keymap.set({ 'n', 'v' }, 'N', 'Nzzzv')
+
+-- move selected lines
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gvzz")
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gvzz")
 
 -- Keybinds to make split navigation easier.
 --  Use Ctrl+<hjkl> to switch between windows
