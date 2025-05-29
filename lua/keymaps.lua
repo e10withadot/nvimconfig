@@ -2,9 +2,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Clear highlights on search when pressing <Esc> in normal mode
+-- Clear highlights on search when pressing <Ctrl-c> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('i', '<Esc>', '<C-c>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -16,20 +17,15 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Put cursor in middle
-vim.keymap.set({ 'n', 'v' }, 'k', function()
-  return (vim.v.count > 0 and vim.v.count or '') .. 'kzz'
-end, { expr = true })
-vim.keymap.set({ 'n', 'v' }, 'j', function()
-  return (vim.v.count > 0 and vim.v.count or '') .. 'jzz'
-end, { expr = true })
-vim.keymap.set({ 'n', 'v' }, 'u', function()
-  return (vim.v.count > 0 and vim.v.count or '') .. 'uzz'
-end, { expr = true })
+vim.keymap.set({ 'n', 'v' }, 'k', 'kzz')
+vim.keymap.set({ 'n', 'v' }, 'j', 'jzz')
+vim.keymap.set({ 'n', 'v' }, 'u', 'uzz')
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
 vim.keymap.set({ 'n', 'v' }, 'G', 'Gzz')
 vim.keymap.set({ 'n', 'v' }, 'n', 'nzzzv')
 vim.keymap.set({ 'n', 'v' }, 'N', 'Nzzzv')
+vim.keymap.set({ 'n', 'v' }, '<CR>', '<CR>zz')
 
 -- move selected lines
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gvzz")
