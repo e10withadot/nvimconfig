@@ -24,6 +24,7 @@ vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
 vim.keymap.set({ 'n', 'v' }, 'G', 'Gzz')
 vim.keymap.set({ 'n', 'v' }, 'n', 'nzzzv')
 vim.keymap.set({ 'n', 'v' }, 'N', 'Nzzzv')
+vim.keymap.set({ 'n', 'v' }, '*', '*zz')
 vim.keymap.set({ 'n', 'v', 'ca' }, '<CR>', '<CR>zz')
 
 -- move selected lines
