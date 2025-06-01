@@ -4,8 +4,7 @@ vim.g.maplocalleader = ' '
 
 -- Clear highlights on search when pressing <Ctrl-c> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('i', '<Esc>', '<C-c>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -25,7 +24,7 @@ vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
 vim.keymap.set({ 'n', 'v' }, 'G', 'Gzz')
 vim.keymap.set({ 'n', 'v' }, 'n', 'nzzzv')
 vim.keymap.set({ 'n', 'v' }, 'N', 'Nzzzv')
-vim.keymap.set({ 'n', 'v' }, '<CR>', '<CR>zz')
+vim.keymap.set({ 'n', 'v', 'ca' }, '<CR>', '<CR>zz')
 
 -- move selected lines
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gvzz")
