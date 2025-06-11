@@ -9,6 +9,10 @@ vim.opt.mouse = 'i'
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = true
 
+-- netrw settings
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+
 -- remove keymap timeout
 vim.o.timeout = false
 vim.o.ttimeout = false
