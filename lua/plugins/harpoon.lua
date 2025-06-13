@@ -9,7 +9,7 @@ return {
       harpoon:list():add()
       print 'Added file to harpoon!'
     end)
-    vim.keymap.set('n', '<C-h>', function()
+    vim.keymap.set('n', '<C-e>', function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
     end)
 
