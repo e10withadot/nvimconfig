@@ -23,7 +23,7 @@ return {
               line.sep(' ', hl, theme.fill),
               tab.current_win().buf().is_changed() and '+' or '',
               tab.number(),
-              tab.current_win().file_icon(),
+              tab.current_win().file_icon() .. ' ',
               tab.name(),
               line.sep(' ', hl, theme.fill),
               hl = hl,
