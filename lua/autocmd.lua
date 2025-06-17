@@ -7,3 +7,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- terminal buffers are hidden, not deleted
+vim.api.nvim_create_autocmd('TermOpen', {
+  callback = function(args)
+    vim.api.nvim_set_option_value('bufhidden', 'hide', { buf = args.buf })
+  end,
+})
