@@ -48,11 +48,22 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Open builtin terminal
-vim.keymap.set('n', '<leader>t', ':sp | term<CR>', { desc = 'Open terminal split' })
+vim.keymap.set('n', '<leader>t', function()
+  for _, win_id in ipairs(vim.api.nvim_list_wins()) do
+    local buff = vim.api.nvim_win_get_buf(win_id)
+    if vim.api.nvim_get_option_value('buftype', { buf = buff }) == 'terminal' then
+      vim.api.nvim_win_hide(win_id)
+      return
+    end
+  end
+  vim.cmd.split()
+  vim.cmd.term()
+end, { desc = 'Toggle terminal split' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
-vim.keymap.set('t', '<C-q>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Keybind for one-click run using Makefiles
 -- F5 to run "make"
