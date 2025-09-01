@@ -48,7 +48,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- New tab in netrw
-vim.keymap.set('n', '<leader>t', '<cmd>tabnew | Ex', { desc = 'Toggle terminal split' })
+vim.keymap.set('n', '<leader>t', '<cmd>tabnew | Ex<CR>', { desc = 'Toggle terminal split' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
