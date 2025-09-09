@@ -14,7 +14,6 @@ vim.g.netrw_banner = 0
 
 -- remove keymap timeout
 vim.o.timeout = false
-vim.o.ttimeout = false
 
 -- force tab indentation
 vim.o.expandtab = true
