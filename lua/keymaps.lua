@@ -34,7 +34,7 @@ vim.keymap.set('n', '<leader>rh', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- replace all instances of word below cursor
 vim.keymap.set('n', '<leader>ra', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-vim.keymap.set('n', '<leader>e', ':Ex<CR>', { desc = 'Open netrw in current working directory' })
+vim.keymap.set('n', '<leader>e', '<cmd>Neotree<CR>', { desc = 'Open Neotree in current working directory' })
 
 -- Keybinds to make split navigation easier.
 --  Use Ctrl+<hjkl> to switch between windows
@@ -44,7 +44,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- New tab in netrw
-vim.keymap.set('n', '<leader>t', '<cmd>tabnew | Ex<CR>', { desc = 'Toggle terminal split' })
+vim.keymap.set('n', '<leader>t', '<cmd>tabnew | Neotree<CR>', { desc = 'Toggle terminal split' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

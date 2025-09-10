@@ -5,11 +5,7 @@ return function(event)
   ---@param bufnr? integer some lsp support methods only in specific files
   ---@return boolean
   local function client_supports_method(client, method, bufnr)
-    if vim.fn.has 'nvim-0.11' == 1 then
-      return client:supports_method(method, bufnr)
-    else
-      return client.supports_method(method, { bufnr = bufnr })
-    end
+    return client:supports_method(method, bufnr)
   end
   -- The following two autocommands are used to highlight references of the
   -- word under your cursor when your cursor rests there for a little while.
