@@ -8,6 +8,8 @@ vim.opt.mouse = 'i'
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
+-- Don't show search count, also shown in status line
+vim.opt.shortmess:append 'S'
 
 -- netrw settings
 vim.g.loaded_netrw = 1

@@ -4,9 +4,9 @@ return {
     'lewis6991/gitsigns.nvim',
     config = function()
       -- set colors before calling setup
-      vim.cmd [[ highlight GitSignsAdd guifg=green ]]
-      vim.cmd [[ highlight GitSignsChange guifg=yellow ]]
-      vim.cmd [[ highlight GitSignsDelete guifg=red ]]
+      vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = 'green' })
+      vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = 'yellow' })
+      vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = 'red' })
       require('gitsigns').setup()
     end,
   },

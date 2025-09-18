@@ -7,7 +7,7 @@ return {
       show_modify = true,
       show_icon = true,
       fnamemodify = ':t',
-      modify_indicator = '+',
+      modify_indicator = ' ',
       no_name = 'Undefined',
       brackets = { ' ', ' ' },
       inactive_tab_max_length = 0,
