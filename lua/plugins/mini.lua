@@ -26,6 +26,14 @@ return { -- Collection of various small independent plugins/modules
 
     -- statusline
     require('mini.statusline').setup()
+    -- set highlights
+    vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineError', { link = 'DiagnosticError' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineWarn', { link = 'DiagnosticWarn' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineInfo', { link = 'DiagnosticInfo' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineHint', { link = 'DiagnosticHint' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineSearch', { link = 'MiniStatuslineFilename' })
+
     local statusline = function()
       -- config sections
       local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
@@ -36,25 +44,17 @@ return { -- Collection of various small independent plugins/modules
       local r, c = unpack(vim.api.nvim_win_get_cursor(0))
       local search = MiniStatusline.section_searchcount { trunc_width = 75 }
 
-      -- set highlights
-      vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineError', { link = 'DiagnosticError' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineWarn', { link = 'DiagnosticWarn' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineInfo', { link = 'DiagnosticInfo' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineHint', { link = 'DiagnosticHint' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineSearch', { link = 'MiniStatuslineFilename' })
-
       return MiniStatusline.combine_groups {
         -- hide normal mode
-        { hl = mode_hl, strings = { string.match(mode, '^N') and '' or mode } },
+        { hl = mode_hl, strings = { mode } },
         { hl = 'MiniStatuslineDevinfo', strings = { git } },
+        '%<', -- Mark general truncate point
+        { hl = 'MiniStatuslineFilename', strings = { filename } },
         -- render diagnostics separately
         { hl = 'MiniStatuslineError', strings = { dc.err > 0 and '󰅚 ' .. tostring(dc.err) } },
         { hl = 'MiniStatuslineWarn', strings = { dc.warn > 0 and '󰀪 ' .. tostring(dc.warn) } },
         { hl = 'MiniStatuslineInfo', strings = { dc.info > 0 and '󰋽 ' .. tostring(dc.info) } },
         { hl = 'MiniStatuslineHint', strings = { dc.hint > 0 and '󰌶 ' .. tostring(dc.hint) } },
-        '%<', -- Mark general truncate point
-        { hl = 'MiniStatuslineFilename', strings = { filename } },
         '%=', -- End left alignment
         { hl = 'MiniStatuslineSearch', strings = { search ~= '' and ' ' or '', search } },
         { hl = 'MiniStatuslineDevinfo', strings = { fileinfo } },
