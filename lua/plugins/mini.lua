@@ -56,7 +56,7 @@ return { -- Collection of various small independent plugins/modules
         { hl = 'MiniStatuslineInfo', strings = { dc.info > 0 and '󰋽 ' .. tostring(dc.info) } },
         { hl = 'MiniStatuslineHint', strings = { dc.hint > 0 and '󰌶 ' .. tostring(dc.hint) } },
         '%=', -- End left alignment
-        { hl = 'MiniStatuslineSearch', strings = { search ~= '' and ' ' or '', search } },
+        { hl = 'MiniStatuslineSearch', strings = { search ~= '' and ' ' .. search } },
         { hl = 'MiniStatuslineDevinfo', strings = { fileinfo } },
         { hl = mode_hl, strings = { tostring(r) .. ',' .. tostring(c) } },
       }
