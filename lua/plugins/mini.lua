@@ -9,7 +9,7 @@ return { -- Collection of various small independent plugins/modules
         info = 0,
         hint = 0,
       }
-      local dia_table = vim.diagnostic.get()
+      local dia_table = vim.diagnostic.get(0)
       for _, msg in ipairs(dia_table) do
         if msg.severity == vim.diagnostic.severity.ERROR then
           counts.err = counts.err + 1
