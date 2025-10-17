@@ -45,9 +45,3 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- Keybind for one-click run using Makefiles
--- F5 to run "make"
--- F6 to run and debug via "make"
-vim.keymap.set('n', '<F5>', '<cmd>sp | term<CR>Amake run<CR>', { desc = 'Run Makefile option' })
-vim.keymap.set('n', '<F6>', '<cmd>sp | term<CR>Amake debug<CR>', { desc = 'Run and debug Makefile option' })
