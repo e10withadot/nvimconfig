@@ -86,7 +86,7 @@ return {
             },
             sorter = conf.generic_sorter {},
             attach_mappings = function(_, map)
-              local function get_tab()
+              local function goto_tab()
                 local selection = require('telescope.actions.state').get_selected_entry()
                 if selection then
                   local tabnr = tonumber(selection.value:match '^(%d+)')
@@ -95,8 +95,8 @@ return {
                   end
                 end
               end
-              map('n', '<CR>', get_tab)
-              map('i', '<CR>', get_tab)
+              map('n', '<CR>', goto_tab)
+              map('i', '<CR>', goto_tab)
               return true
             end,
           })
