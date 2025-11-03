@@ -49,6 +49,7 @@ return { -- Collection of various small independent plugins/modules
         { hl = mode_hl, strings = { mode } },
         { hl = 'MiniStatuslineDevinfo', strings = { git } },
         '%<', -- Mark general truncate point
+        { hl = 'MiniStatuslineFilename', strings = { vim.fn.tabpagenr '$' ~= 1 and '󰓩 ' .. vim.fn.tabpagenr() } },
         { hl = 'MiniStatuslineFilename', strings = { filename } },
         -- render diagnostics separately
         { hl = 'MiniStatuslineError', strings = { dc.err > 0 and '󰅚 ' .. tostring(dc.err) } },
