@@ -31,13 +31,13 @@ return {
           },
         },
       },
-      jdtls = {},
+      stylua = {},
+      ltex_plus = {},
     }
     for name, settings in pairs(servers) do
       vim.lsp.config(name, settings)
       vim.lsp.enable(name)
     end
-
     --  Runs only when LSP is attached
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -45,13 +45,11 @@ return {
         -- keymaps
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        vim.keymap.set('n', 'grD', require('telescope.builtin').lsp_document_symbols,
-          { buffer = event.buf, desc = 'Document Symbols' })
+        vim.keymap.set('n', 'grD', require('telescope.builtin').lsp_document_symbols, { buffer = event.buf, desc = 'Document Symbols' })
 
         -- Fuzzy find all the symbols in your current workspace.
         --  Similar to document symbols, except searches over your entire project.
-        vim.keymap.set('n', 'gW', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-          { buffer = event.buf, desc = '[W]orkspace [S]ymbols' })
+        vim.keymap.set('n', 'gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, { buffer = event.buf, desc = '[W]orkspace [S]ymbols' })
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
