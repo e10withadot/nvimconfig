@@ -36,7 +36,7 @@ return { -- Collection of various small independent plugins/modules
 
     local statusline = function()
       -- config sections
-      local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
+      local mode, mode_hl = MiniStatusline.section_mode { trunc_width = math.huge }
       local git = MiniStatusline.section_git { trunc_width = 40 }
       local dc = diagnostic_count()
       local filename = MiniStatusline.section_filename { trunc_width = 140 }
