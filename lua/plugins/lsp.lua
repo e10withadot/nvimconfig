@@ -31,6 +31,7 @@ return {
           },
         },
       },
+      jdtls = {},
     }
     for name, settings in pairs(servers) do
       vim.lsp.config(name, settings)
