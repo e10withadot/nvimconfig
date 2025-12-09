@@ -8,36 +8,35 @@ return {
   },
   config = function()
     -- Language Server settings
-    local servers = {
-      clangd = {
-        capabilities = {
-          textDocument = {
-            completion = {
-              completionItem = {
-                snippetSupport = false,
-              },
-            },
-          },
-        },
-      },
-      pylsp = {},
-      lua_ls = {
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
-            },
-            diagnostics = { disable = { 'missing-fields' } },
-          },
-        },
-      },
-      stylua = {},
-      ltex_plus = {},
-    }
-    for name, settings in pairs(servers) do
+    local names = vim.api.nvim_get_runtime_file('lua/lsp/*.lua', true)
+    for _, abs_name in ipairs(names) do
+      local name = vim.fn.fnamemodify(abs_name, ':t:r')
+      local settings = require('lsp.' .. name)
       vim.lsp.config(name, settings)
       vim.lsp.enable(name)
     end
+
+    vim.api.nvim_create_user_command('LspSet', function()
+      local d = {
+        width = math.floor(vim.o.columns * 0.8),
+        height = math.floor(vim.o.lines * 0.8),
+        row = math.floor(vim.o.lines * 0.1),
+        col = math.floor(vim.o.columns * 0.1),
+      }
+      local buf = vim.api.nvim_create_buf(false, true)
+      local opts = {
+        style = 'minimal',
+        relative = 'editor',
+        width = d.width,
+        height = d.height,
+        row = d.row,
+        col = d.col,
+        border = 'rounded',
+      }
+      local win = vim.api.nvim_open_win(buf, true, opts)
+      vim.api.nvim_set_current_win(win)
+      vim.cmd.edit(vim.fn.stdpath 'config' .. '/lua/lsp/')
+    end, { desc = 'Open Language Server Settings' })
     --  Runs only when LSP is attached
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
