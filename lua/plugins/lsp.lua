@@ -37,6 +37,7 @@ return {
       vim.api.nvim_set_current_win(win)
       vim.cmd.edit(vim.fn.stdpath 'config' .. '/lua/lsp/')
     end, { desc = 'Open Language Server Settings' })
+
     --  Runs only when LSP is attached
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),

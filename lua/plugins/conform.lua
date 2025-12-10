@@ -1,3 +1,10 @@
+local formatters = {}
+local names = vim.api.nvim_get_runtime_file('lua/format/*.lua', true)
+for _, abs_name in ipairs(names) do
+  local name = vim.fn.fnamemodify(abs_name, ':t:r')
+  formatters[name] = require('format.' .. name)
+end
+
 return { -- Autoformat
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
@@ -18,13 +25,6 @@ return { -- Autoformat
         }
       end
     end,
-    formatters_by_ft = {
-      lua = { 'stylua' },
-      -- Conform can also run multiple formatters sequentially
-      -- python = { "isort", "black" },
-      --
-      -- You can use 'stop_after_first' to run the first available formatter from the list
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
-    },
+    formatters_by_ft = formatters,
   },
 }
