@@ -1,5 +1,13 @@
 return { -- Collection of various small independent plugins/modules
   'nvim-mini/mini.nvim',
+  dependencies = {
+    -- `friendly-snippets` contains a variety of premade snippets.
+    --    See the README about individual language/framework/plugin snippets:
+    --    https://github.com/rafamadriz/friendly-snippets
+    {
+      'rafamadriz/friendly-snippets',
+    },
+  },
   config = function()
     -- count num of diagnostics
     local diagnostic_count = function()
@@ -85,6 +93,11 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
     require('mini.sessions').setup { autoread = true }
+    local snippets = require 'mini.snippets'
+    snippets.setup {
+      snippets.gen_loader.from_lang(),
+      snippets.gen_loader.from_runtime 'friendly-snippets',
+    }
     --  Check out: https://github.com/echasnovski/mini.nvim
   end,
 }

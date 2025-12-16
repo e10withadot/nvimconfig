@@ -3,7 +3,6 @@ return {
   'neovim/nvim-lspconfig',
   -- actual useful plugins lol
   dependencies = {
-    'saghen/blink.cmp',
     'folke/lazydev.nvim',
   },
   config = function()
@@ -43,13 +42,20 @@ return {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
         -- keymaps
-        -- goto global defintion
-        vim.keymap.set('n', 'grd', require('telescope.builtin').lsp_definitions, { buffer = event.buf, desc = '[G]oto [D]efintion' })
+        -- goto global definition
+        vim.keymap.set('n', 'grd', function()
+          require('telescope.builtin').lsp_definitions {
+            jump_type = 'tab',
+          }
+        end, { buffer = event.buf, desc = '[G]oto [D]efinition' })
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
         vim.keymap.set('n', 'grD', vim.lsp.buf.declaration, { buffer = event.buf, desc = '[G]oto [D]eclaration' })
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client and client:supports_method 'textDocument/completion' then
+          vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+        end
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
