@@ -37,11 +37,15 @@ return {
       require('telescope').setup {
         -- Insert default mappings below:
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          -- necessary due to nvim-treesitter rewrite
+          preview = {
+            treesitter = false,
+          },
+          --   mappings = {
+          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          --   },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {

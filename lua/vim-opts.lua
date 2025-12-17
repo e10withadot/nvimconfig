@@ -42,6 +42,9 @@ vim.opt.undofile = true
 -- completion
 vim.o.completeopt = 'fuzzy,menuone,noinsert'
 
+-- everything unfolded at startup
+vim.o.foldenable = false
+
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true

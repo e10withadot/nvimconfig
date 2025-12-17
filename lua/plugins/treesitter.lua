@@ -7,9 +7,8 @@ return { -- Highlight, edit, and navigate code
     require('nvim-treesitter').install(ensure_installed)
 
     vim.api.nvim_create_autocmd('FileType', {
-      vim.api.nvim_create_augroup('treesitter.setup', {}),
+      group = vim.api.nvim_create_augroup('treesitter.setup', {}),
       callback = function(args)
-        local buf = args.buf
         local filetype = args.match
 
         -- check for valid language
@@ -18,13 +17,15 @@ return { -- Highlight, edit, and navigate code
           return
         end
 
-        -- optional treesitter folding
-        -- vim.wo.foldmethod = 'expr'
-        -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        -- highlighting
+        vim.treesitter.start()
 
-        vim.treesitter.start(buf, lang)
+        -- folding
+        vim.wo.foldmethod = 'expr'
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
-        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        -- indentation
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })
   end,
