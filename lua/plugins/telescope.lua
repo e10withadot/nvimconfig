@@ -3,7 +3,7 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    tag = 'v0.2.0',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -37,15 +37,11 @@ return {
       require('telescope').setup {
         -- Insert default mappings below:
         --
-        defaults = {
-          -- necessary due to nvim-treesitter rewrite
-          preview = {
-            treesitter = false,
-          },
-          --   mappings = {
-          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-          --   },
-        },
+        -- defaults = {
+        --   mappings = {
+        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+        --   },
+        -- },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
