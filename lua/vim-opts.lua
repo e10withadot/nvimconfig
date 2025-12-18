@@ -8,8 +8,9 @@ vim.opt.mouse = 'i'
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
--- Don't show search count, also shown in status line
+-- Don't show search count or autocompletion warnings
 vim.opt.shortmess:append 'S'
+vim.opt.shortmess:append 'c'
 -- Don't show tabline
 vim.opt.showtabline = 0
 
