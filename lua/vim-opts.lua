@@ -51,6 +51,8 @@ vim.o.foldenable = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- enable if terminal supports bidi
+vim.o.termbidi = true
 -- remove parts of a combined character (nikud)
 vim.o.delcombine = true
 
