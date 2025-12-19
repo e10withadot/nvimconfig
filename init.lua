@@ -1,6 +1,4 @@
 require 'keymaps'
-require 'vim-opts'
-require 'autocmd'
 
 -- diagnostics, requires nerd font
 vim.g.have_nerd_font = true
@@ -21,6 +19,9 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   { import = 'plugins' },
 }
+
+require 'vim-opts'
+require 'autocmd'
 
 -- The line beneath this is called `modeline`.
 -- vim: ts=2 sts=2 sw=2 et
