@@ -41,16 +41,8 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
-        -- keymaps
         -- goto global definition
-        vim.keymap.set('n', 'grd', function()
-          require('telescope.builtin').lsp_definitions {
-            jump_type = 'tab',
-          }
-        end, { buffer = event.buf, desc = '[G]oto [D]efinition' })
-        -- WARN: This is not Goto Definition, this is Goto Declaration.
-        --  For example, in C this would take you to the header.
-        vim.keymap.set('n', 'grD', vim.lsp.buf.declaration, { buffer = event.buf, desc = '[G]oto [D]eclaration' })
+        vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { buffer = event.buf, desc = '[G]oto [D]efinition' })
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client:supports_method 'textDocument/completion' then
