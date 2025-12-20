@@ -9,6 +9,8 @@ return { -- Collection of various small independent plugins/modules
     },
   },
   config = function()
+    -- icons
+    require('mini.icons').setup()
     -- count num of diagnostics
     local diagnostic_count = function()
       local counts = {
