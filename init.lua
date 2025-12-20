@@ -21,7 +21,7 @@ require('lazy').setup {
 }
 
 require 'vim-opts'
-require 'autocmd'
+require 'commands'
 
 -- The line beneath this is called `modeline`.
 -- vim: ts=2 sts=2 sw=2 et

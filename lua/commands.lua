@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
+-- Toggle between hebrew and english
 vim.api.nvim_create_user_command('HebrewToggle', function()
   if not vim.b.hebrew_mode then
     vim.opt_local.keymap = 'hebrew'
@@ -23,7 +24,7 @@ vim.api.nvim_create_user_command('HebrewToggle', function()
     vim.b.hebrew_mode = true
     vim.notify 'Switched to Hebrew'
   else
-    vim.opt_local.keymap = ''
+    vim.opt_local.keymap = 'english'
     vim.opt_local.iminsert = 0
     vim.opt_local.imsearch = 0
     vim.notify 'Switched to English'
