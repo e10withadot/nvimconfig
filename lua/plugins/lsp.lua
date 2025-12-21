@@ -2,9 +2,6 @@ return {
   -- help pages for language servers
   'neovim/nvim-lspconfig',
   -- actual useful plugins lol
-  dependencies = {
-    'folke/lazydev.nvim',
-  },
   config = function()
     -- Language Server settings
     local names = vim.api.nvim_get_runtime_file('lua/lsp/*.lua', true)
