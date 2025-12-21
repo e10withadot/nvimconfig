@@ -9,8 +9,6 @@ return { -- Collection of various small independent plugins/modules
     },
   },
   config = function()
-    -- icons
-    require('mini.icons').setup()
     -- count num of diagnostics
     local diagnostic_count = function()
       local counts = {
@@ -35,7 +33,8 @@ return { -- Collection of various small independent plugins/modules
     end
 
     -- statusline
-    require('mini.statusline').setup()
+    local MiniStatusline = require 'mini.statusline'
+    MiniStatusline.setup()
     -- set highlights
     vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { bg = 'NONE' })
     vim.api.nvim_set_hl(0, 'MiniStatuslineError', { link = 'DiagnosticError' })
