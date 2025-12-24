@@ -91,3 +91,12 @@ vim.o.confirm = true
 
 -- Enable fuzzy finding within directories using :find
 vim.opt.path:append '**'
+
+-- make sure cshtml is detected
+--
+vim.filetype.add {
+  extension = {
+    cshtml = 'razor',
+    razor = 'razor',
+  },
+}
