@@ -50,5 +50,16 @@ return { -- Highlight, edit, and navigate code
         treesitter_start(event.buf, lang)
       end,
     })
+
+    vim.api.nvim_create_user_command('TSStart', function()
+      local buf = vim.api.nvim_get_current_buf()
+      local filetype = vim.bo.filetype
+      local lang = vim.treesitter.language.get_lang(filetype) or filetype
+      if lang then
+        treesitter_start(buf, lang)
+      else
+        vim.notify('Language not available.', vim.log.levels.ERROR, {})
+      end
+    end, {})
   end,
 }
