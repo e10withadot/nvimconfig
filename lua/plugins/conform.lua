@@ -11,10 +11,17 @@ return { -- Autoformat
   cmd = { 'ConformInfo' },
   opts = {
     notify_on_error = false,
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_format = 'fallback',
-    },
+    function(bufnr)
+      local disable_filetypes = { razor = true }
+      if disable_filetypes[vim.bo[bufnr].filetype] then
+        return nil
+      else
+        return {
+          timeout_ms = 500,
+          lsp_format = 'fallback',
+        }
+      end
+    end,
     formatters_by_ft = formatters,
   },
 }
