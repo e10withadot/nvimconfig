@@ -19,5 +19,6 @@ return {
     vim.keymap.set('n', '<leader>sd', fzf.diagnostics_document, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>ss', fzf.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>t', fzf.tabs, { desc = 'Search [T]abs' })
+    vim.keymap.set('n', '<leader>h', fzf.oldfiles, { desc = 'Search [H]istory' })
   end,
 }
