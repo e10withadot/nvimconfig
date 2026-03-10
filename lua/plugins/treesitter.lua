@@ -31,7 +31,7 @@ local treesitter_install = function(buf, lang)
   end
 end
 
-return { -- Highlight, edit, and navigate code
+return { -- Treesitter helper plugin
   'nvim-treesitter/nvim-treesitter',
   lazy = false,
   branch = 'main',

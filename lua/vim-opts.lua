@@ -93,7 +93,6 @@ vim.o.confirm = true
 vim.opt.path:append '**'
 
 -- make sure cshtml is detected
---
 vim.filetype.add {
   extension = {
     cshtml = 'razor',
