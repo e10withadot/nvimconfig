@@ -41,10 +41,6 @@ return {
         -- goto global definition
         vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { buffer = event.buf, desc = '[G]oto [D]efinition' })
 
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client:supports_method 'textDocument/completion' then
-          vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-        end
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         -- When you move your cursor, the highlights will be cleared (the second autocommand).

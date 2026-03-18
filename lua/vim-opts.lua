@@ -41,9 +41,6 @@ vim.o.smartindent = true
 -- Save undo history
 vim.o.undofile = true
 
--- completion
-vim.o.completeopt = 'fuzzy,menuone,noinsert'
-
 -- everything unfolded at startup
 vim.o.foldenable = false
 

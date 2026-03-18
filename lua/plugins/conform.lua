@@ -12,7 +12,7 @@ return { -- Autoformat
   opts = {
     notify_on_error = false,
     function(bufnr)
-      local disable_filetypes = { razor = true }
+      local disable_filetypes = {}
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return nil
       else

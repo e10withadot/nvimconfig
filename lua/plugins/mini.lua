@@ -1,13 +1,5 @@
 return { -- Collection of various small independent plugins/modules
   'nvim-mini/mini.nvim',
-  dependencies = {
-    -- `friendly-snippets` contains a variety of premade snippets.
-    --    See the README about individual language/framework/plugin snippets:
-    --    https://github.com/rafamadriz/friendly-snippets
-    {
-      'rafamadriz/friendly-snippets',
-    },
-  },
   config = function()
     -- count num of diagnostics
     local diagnostic_count = function()
@@ -79,26 +71,8 @@ return { -- Collection of various small independent plugins/modules
       },
       use_icons = true,
     }
-    local hipatterns = require 'mini.hipatterns'
-    hipatterns.setup {
-      highlighters = {
-        -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-        fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-        hack = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
-        todo = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
-        note = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
-
-        -- Highlight hex color strings (`#rrggbb`) using that color
-        hex_color = hipatterns.gen_highlighter.hex_color(),
-      },
-    }
     require('mini.sessions').setup { autoread = true }
     require('mini.pairs').setup {}
-    local snippets = require 'mini.snippets'
-    snippets.setup {
-      snippets.gen_loader.from_lang(),
-      snippets.gen_loader.from_runtime 'friendly-snippets',
-    }
     --  Check out: https://github.com/echasnovski/mini.nvim
   end,
 }
