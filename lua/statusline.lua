@@ -17,7 +17,7 @@ end
 
 -- search count
 function comp.search()
-  if not vim.v.hlsearch then return '' end
+  if vim.fn.eval('v:hlsearch') == 0 then return '' end
 
   local ok, count = pcall(vim.fn.searchcount, { maxcount = 9999 })
   if not ok then return ' ?/? ' end
