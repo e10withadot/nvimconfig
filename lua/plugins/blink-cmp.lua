@@ -1,14 +1,8 @@
 return {
   'saghen/blink.cmp',
   version = '1.*',
-
-  ---@module 'blink.cmp'
-  ---@type blink.cmp.Config
   opts = {
-    keymap = {
-      preset = 'default',
-      ["<C-space>"] = { "show_and_insert" }
-    },
+    keymap = { preset = 'default' },
     appearance = {
       nerd_font_variant = 'mono'
     },
@@ -18,5 +12,12 @@ return {
     },
     fuzzy = { implementation = "prefer_rust_with_warning" }
   },
-  opts_extend = { "sources.default" }
+  opts_extend = { "sources.default" },
+  config = function ()
+    local blink = require('blink.cmp')
+    blink.setup()
+    vim.keymap.set('i', '<C-x><C-o>', function ()
+      blink.show_and_insert()
+    end)
+  end
 }
