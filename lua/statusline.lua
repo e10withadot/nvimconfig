@@ -9,7 +9,7 @@ end
 -- tab number
 function comp.tabnr()
   if vim.fn.tabpagenr '$' ~= 1 then
-    return ' 󰓩 ' .. vim.fn.tabpagenr()
+    return '  󰓩 ' .. vim.fn.tabpagenr()
   else
     return ''
   end
@@ -18,7 +18,7 @@ end
 -- git branch info
 function comp.git_branch()
   local fname = vim.api.nvim_buf_get_name(0)
-  local filetype = vim.filetype.match({ buf = 0})
+  local filetype = vim.filetype.match({ buf = 0 })
   if fname == '' or filetype == 'oil' then return '' end
 
   local dir = vim.fn.fnamemodify(fname, ":p:h")
