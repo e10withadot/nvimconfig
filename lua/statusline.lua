@@ -3,7 +3,7 @@ local comp = {}
 
 -- global statusline func
 function _G.status(func)
-  return comp[func]();
+  return comp[func]()
 end
 
 -- tab number
@@ -13,6 +13,19 @@ function comp.tabnr()
   else
     return ''
   end
+end
+
+-- git branch info
+function comp.git_branch()
+  local fname = vim.api.nvim_buf_get_name(0)
+  local filetype = vim.filetype.match({ buf = 0})
+  if fname == '' or filetype == 'oil' then return '' end
+
+  local dir = vim.fn.fnamemodify(fname, ":p:h")
+  local res = vim.system({ "git", "branch", "--show-current" }, { cwd = dir, text = true }):wait()
+  if res.code ~= 0 then return '' end
+  local branch = res.stdout:gsub("%s+", "")
+  return '  ' .. branch .. ' '
 end
 
 -- search count
@@ -72,7 +85,7 @@ vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold
 vim.api.nvim_set_hl(0, 'StatusGit', { fg = '#DDDDDD', bg = '#444444' })
 
 local mode = '%#StatusSecondary# %{toupper(mode())} %*'
-local gitinfo = "%#StatusGit#  %{get(b:,'gitsigns_head','')} %*"
+local gitinfo = '%#StatusGit#%{v:lua.status("git_branch")}%*'
 local tabinfo = '%#StatusPrimary#%{v:lua.status("tabnr")}'
 local fileinfo = ' %q%F%m%r'
 local diagnostics = ' %{v:lua.status("diagnostic_count")}'
