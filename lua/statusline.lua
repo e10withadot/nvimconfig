@@ -19,9 +19,12 @@ end
 function comp.git_branch()
   local fname = vim.api.nvim_buf_get_name(0)
   local filetype = vim.filetype.match({ buf = 0 })
-  if fname == '' or filetype == 'oil' then return '' end
-
+  if fname == '' or filetype == nil then return '' end
   local dir = vim.fn.fnamemodify(fname, ":p:h")
+  if filetype == 'oil' then
+    dir = dir:match('^oil://(.*)')
+  end
+
   local res = vim.system({ "git", "branch", "--show-current" }, { cwd = dir, text = true }):wait()
   if res.code ~= 0 then return '' end
   local branch = res.stdout:gsub("%s+", "")
@@ -84,15 +87,20 @@ vim.api.nvim_set_hl(0, 'StatusPrimary', { fg = '#DDDDDD', bg = '#333333' })
 vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold = true })
 vim.api.nvim_set_hl(0, 'StatusGit', { fg = '#DDDDDD', bg = '#444444' })
 
+-- change color on mode change
 vim.api.nvim_create_autocmd("ModeChanged", {
   callback = function (event)
     local new_mode = event.match:match(':(.)')
     if new_mode == 'i' then
       vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#00DD66', bold = true })
-    elseif new_mode == 'v' or new_mode == 'V' or new_mode == '^V' then
+    elseif new_mode == 'v' or new_mode == 'V' or new_mode == '' then
       vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DD44DD', bold = true })
     elseif new_mode == 'c' then
       vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#00AADD', bold = true })
+    elseif new_mode == 'R' then
+      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DD3366', bold = true })
+    elseif new_mode == 't' then
+      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#00DD66', bg = '#111111', bold = true })
     else
       vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold = true })
     end
