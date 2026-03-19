@@ -1,10 +1,12 @@
 -- functions
 local comp = {}
 
+-- global statusline func
 function _G.status(func)
   return comp[func]();
 end
 
+-- tab number
 function comp.tabnr()
   if vim.fn.tabpagenr '$' ~= 1 then
     return ' 󰓩 ' .. vim.fn.tabpagenr()
@@ -13,6 +15,22 @@ function comp.tabnr()
   end
 end
 
+-- search count
+function comp.search()
+  if not vim.v.hlsearch then return '' end
+
+  local ok, count = pcall(vim.fn.searchcount, { maxcount = 9999 })
+  if not ok then return ' ?/? ' end
+  if count.total == 0 or count.current == 0 then
+    return ''
+  elseif count.incomplete == 1 then
+    return ' ' .. count.current .. '/? '
+  else
+    return ' ' .. count.current .. '/' .. count.total .. ' '
+  end
+end
+
+-- error count
 function comp.diagnostic_count()
   local counts = {
     err = 0,
@@ -47,17 +65,19 @@ function comp.diagnostic_count()
   end
   return output
 end
--- { hl = 'MiniStatuslineSearch', strings = { search ~= '' and ' ' .. search } },
 
 -- highlights
 vim.api.nvim_set_hl(0, 'StatusPrimary', { fg = '#DDDDDD', bg = '#333333' })
 vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold = true })
+vim.api.nvim_set_hl(0, 'StatusGit', { fg = '#DDDDDD', bg = '#444444' })
 
 local mode = '%#StatusSecondary# %{toupper(mode())} %*'
+local gitinfo = "%#StatusGit#  %{get(b:,'gitsigns_head','')} %*"
 local tabinfo = '%#StatusPrimary#%{v:lua.status("tabnr")}'
 local fileinfo = ' %q%F%m%r'
 local diagnostics = ' %{v:lua.status("diagnostic_count")}'
+local searchcount = '%{v:lua.status("search")}'
 local filetype = '%{&fileformat} | %{&filetype} %*'
 local rowcol = '%#StatusSecondary# %l,%c '
 
-vim.o.statusline = mode .. tabinfo .. fileinfo .. diagnostics .. ' %= ' .. filetype .. rowcol
+vim.o.statusline = mode .. gitinfo .. tabinfo .. fileinfo .. diagnostics .. ' %= ' .. searchcount .. filetype .. rowcol

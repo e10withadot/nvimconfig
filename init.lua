@@ -1,10 +1,10 @@
 require 'keymaps'
 require 'vim-opts'
 require 'commands'
-require 'statusline'
 
--- diagnostics, requires nerd font
 vim.g.have_nerd_font = true
+-- nerd fonts required from now on
+require 'statusline'
 require 'diagnostics'
 
 -- Install lazy.nvim plugin manager
