@@ -18,6 +18,9 @@ vim.o.showtabline = 0
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- session options
+vim.opt.sessionoptions = "help,options,resize,winpos,curdir,folds,buffers,blank"
+
 -- remove keymap timeout
 vim.o.timeout = false
 
