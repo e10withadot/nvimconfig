@@ -5,7 +5,10 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    keymap = { preset = 'default' },
+    keymap = {
+      preset = 'default',
+      ["<C-space>"] = { "show_and_insert" }
+    },
     appearance = {
       nerd_font_variant = 'mono'
     },
