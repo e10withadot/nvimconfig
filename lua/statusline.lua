@@ -84,7 +84,22 @@ vim.api.nvim_set_hl(0, 'StatusPrimary', { fg = '#DDDDDD', bg = '#333333' })
 vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold = true })
 vim.api.nvim_set_hl(0, 'StatusGit', { fg = '#DDDDDD', bg = '#444444' })
 
-local mode = '%#StatusSecondary# %{toupper(mode())} %*'
+vim.api.nvim_create_autocmd("ModeChanged", {
+  callback = function (event)
+    local new_mode = event.match:match(':(.)')
+    if new_mode == 'i' then
+      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#00DD66', bold = true })
+    elseif new_mode == 'v' or new_mode == 'V' or new_mode == '^V' then
+      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DD44DD', bold = true })
+    elseif new_mode == 'c' then
+      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#00AADD', bold = true })
+    else
+      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold = true })
+    end
+  end
+})
+
+local mode = '%#StatusSecondary# %{mode()} %*'
 local gitinfo = '%#StatusGit#%{v:lua.status("git_branch")}%*'
 local tabinfo = '%#StatusPrimary#%{v:lua.status("tabnr")}'
 local fileinfo = ' %q%F%m%r'

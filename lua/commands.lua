@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- session management
--- load session on startup
+-- load session on startup if exists
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argc() == 0 and vim.fn.filereadable("Session.vim") == 1 then
@@ -19,11 +19,13 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
--- save session on leave
-vim.api.nvim_create_autocmd("VimLeavePre", {
-    callback = function ()
-        vim.cmd('mksession!')
-    end,
+-- save session on leave if exists
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function ()
+    if vim.fn.filereadable("Session.vim") == 1 then
+      vim.cmd('mksession! Session.vim')
+    end
+  end,
 })
 
 -- terminal buffers are hidden, not deleted
