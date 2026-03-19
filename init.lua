@@ -1,6 +1,7 @@
 require 'keymaps'
 require 'vim-opts'
 require 'commands'
+require 'language_server'
 
 vim.g.have_nerd_font = true
 -- nerd fonts required from now on
