@@ -20,6 +20,14 @@ vim.keymap.set({ 'n', 'v' }, '*', '*zz')
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gvzz")
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gvzz")
 
+-- autopairs
+vim.keymap.set('i', '(', '()<Left>')
+vim.keymap.set('i', '[', '[]<Left>')
+vim.keymap.set('i', '{', '{}<Left>')
+vim.keymap.set('i', '"', '""<Left>')
+vim.keymap.set("i", "'", "''<Left>")
+vim.keymap.set("i", "`", "``<Left>")
+
 -- paste and keep
 vim.keymap.set('x', '<leader>p', '"_dP')
 
