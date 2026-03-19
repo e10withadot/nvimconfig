@@ -1,6 +1,7 @@
 require 'keymaps'
 require 'vim-opts'
 require 'commands'
+require 'statusline'
 
 -- diagnostics, requires nerd font
 vim.g.have_nerd_font = true
