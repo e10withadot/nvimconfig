@@ -25,11 +25,30 @@ return {
       vim.lsp.config(name, settings)
     end
     -- enable all installed LSPs
-    local installed_packages = require("mason-registry").get_installed_packages()
-    local installed_lsp_names = vim.iter(installed_packages):fold({}, function(acc, pack)
-      table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
+    local registry = require("mason-registry")
+    local installed = registry.get_installed_package_names()
+    local specs = registry.get_all_package_specs()
+    local installed_specs = {}
+    for i, name in ipairs(installed) do
+      for _, spec in ipairs(specs) do
+        if name == spec.name then
+          installed_specs[i] = spec
+        end
+      end
+    end
+    local installed_lsp_names = vim.iter(installed_specs):fold({}, function(acc, spec)
+      table.insert(acc, spec.neovim and spec.neovim.lspconfig)
       return acc
     end)
     vim.lsp.enable(installed_lsp_names)
+
+    --  Runs only when LSP is attached
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('LSP Manipulation', { clear = true }),
+      callback = function(event)
+        -- goto global definition
+        vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { buffer = event.buf, desc = '[G]oto [D]efinition' })
+      end,
+    })
   end,
 }
