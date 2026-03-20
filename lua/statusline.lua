@@ -111,7 +111,7 @@ local tabinfo = '%#StatusPrimary#%{v:lua.status("tabnr")}'
 local fileinfo = ' %q%F%m%r'
 local diagnostics = ' %{v:lua.status("diagnostic_count")}'
 local searchcount = '%{v:lua.status("search")}'
-local filetype = '%{&fileformat} | %{&filetype} %*'
+local filetype = '(%{&fileformat}) %{&filetype} %*'
 local rowcol = '%#StatusSecondary# %l,%c '
 
 vim.o.statusline = mode .. gitinfo .. tabinfo .. fileinfo .. diagnostics .. ' %= ' .. searchcount .. filetype .. rowcol

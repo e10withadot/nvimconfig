@@ -44,7 +44,7 @@ return {
 
     --  Runs only when LSP is attached
     vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('LSP Manipulation', { clear = true }),
+      group = vim.api.nvim_create_augroup('lsp.remaps', { clear = true }),
       callback = function(event)
         -- goto global definition
         vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { buffer = event.buf, desc = '[G]oto [D]efinition' })
