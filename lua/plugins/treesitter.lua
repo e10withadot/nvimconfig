@@ -4,11 +4,6 @@ local treesitter_start = function(buf, lang)
   -- highlighting
   pcall(vim.treesitter.start, buf, lang)
 
-  -- folding
-  -- vim.wo.foldmethod = 'expr'
-  -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-  -- vim.wo.foldenable = false
-
   -- indentation
   vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 end

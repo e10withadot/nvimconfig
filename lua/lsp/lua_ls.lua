@@ -9,8 +9,6 @@ return {
 
     client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most
-        -- likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
         -- Tell the language server how to find Lua modules same way as Neovim
         -- (see `:h lua-module-load`)
