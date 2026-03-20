@@ -99,8 +99,6 @@ vim.api.nvim_create_autocmd("ModeChanged", {
       vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#00AADD', bold = true })
     elseif new_mode == 'R' then
       vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DD3366', bold = true })
-    elseif new_mode == 't' then
-      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#00DD66', bg = '#111111', bold = true })
     else
       vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold = true })
     end

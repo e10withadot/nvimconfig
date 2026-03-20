@@ -9,6 +9,7 @@ return {
   ---@diagnostics enable: missing-fields
   config = function()
     local fzf = require 'fzf-lua'
+    fzf.register_ui_select()
     vim.keymap.set('n', '<leader>sh', fzf.helptags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sf', fzf.files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>sg', fzf.git_files, { desc = '[S]earch [G]it' })
@@ -18,5 +19,6 @@ return {
     vim.keymap.set('n', '<leader>ss', fzf.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>t', fzf.tabs, { desc = 'Search [T]abs' })
     vim.keymap.set('n', '<leader>h', fzf.oldfiles, { desc = 'Search [H]istory' })
+    vim.keymap.set('n', '<leader>u', fzf.undotree, { desc = '[U]ndotree' })
   end,
 }
