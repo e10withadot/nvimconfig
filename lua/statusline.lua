@@ -83,35 +83,35 @@ function comp.diagnostic_count()
 end
 
 -- highlights
-vim.api.nvim_set_hl(0, 'StatusPrimary', { fg = '#DDDDDD', bg = '#333333' })
-vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold = true })
-vim.api.nvim_set_hl(0, 'StatusGit', { fg = '#DDDDDD', bg = '#444444' })
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = '#DDDDDD', bg = '#333333' })
+vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#DDDDDD', bold = true })
+vim.api.nvim_set_hl(0, 'StatusLineGit', { fg = '#DDDDDD', bg = '#444444' })
 
 -- change color on mode change
 vim.api.nvim_create_autocmd("ModeChanged", {
   callback = function (event)
     local new_mode = event.match:match(':(.)')
     if new_mode == 'i' then
-      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#00DD66', bold = true })
+      vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#00DD66', bold = true })
     elseif new_mode == 'v' or new_mode == 'V' or new_mode == '' then
-      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DD44DD', bold = true })
+      vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#DD44DD', bold = true })
     elseif new_mode == 'c' then
-      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#00AADD', bold = true })
+      vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#00AADD', bold = true })
     elseif new_mode == 'R' then
-      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DD3366', bold = true })
+      vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#DD3366', bold = true })
     else
-      vim.api.nvim_set_hl(0, 'StatusSecondary', { fg = '#333333', bg = '#DDDDDD', bold = true })
+      vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#DDDDDD', bold = true })
     end
   end
 })
 
-local mode = '%#StatusSecondary# %{mode()} %*'
-local gitinfo = '%#StatusGit#%{v:lua.status("git_branch")}%*'
-local tabinfo = '%#StatusPrimary#%{v:lua.status("tabnr")}'
+local mode = '%#StatusLineMode# %{mode()} %*'
+local gitinfo = '%#StatusLineGit#%{v:lua.status("git_branch")}%*'
+local tabinfo = '%#StatusLine#%{v:lua.status("tabnr")}'
 local fileinfo = ' %q%F%m%r'
 local diagnostics = ' %{v:lua.status("diagnostic_count")}'
 local searchcount = '%{v:lua.status("search")}'
-local filetype = '(%{&fileformat}) %{&filetype} %*'
-local rowcol = '%#StatusSecondary# %l,%c '
+local filetype = '%{&filetype} (%{&fileformat}) %*'
+local rowcol = '%#StatusLineMode# %l,%c '
 
 vim.o.statusline = mode .. gitinfo .. tabinfo .. fileinfo .. diagnostics .. ' %= ' .. searchcount .. filetype .. rowcol
