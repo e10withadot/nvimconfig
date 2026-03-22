@@ -12,6 +12,7 @@ return {
   },
   config = function()
     require('mason').setup {
+      -- roslyn has a third-party repo
       registries = {
         'github:mason-org/mason-registry',
         'github:Crashdummyy/mason-registry',
@@ -43,7 +44,12 @@ return {
     -- enable all installed LSPs
     local installed_specs = get_installed_package_specs()
     local installed_lsp_names = vim.iter(installed_specs):fold({}, function(acc, spec)
-      table.insert(acc, spec.neovim and spec.neovim.lspconfig)
+      local lsp_name = spec.neovim and spec.neovim.lspconfig
+      -- exception for roslyn
+      if not lsp_name and spec.name == 'roslyn' then
+        lsp_name = 'roslyn_ls'
+      end
+      table.insert(acc, lsp_name)
       return acc
     end)
     vim.lsp.enable(installed_lsp_names)

@@ -14,6 +14,8 @@ vim.opt.shortmess:append 'c'
 -- Don't show tabline
 vim.o.showtabline = 0
 
+vim.o.termguicolors = true
+
 -- netrw settings
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
