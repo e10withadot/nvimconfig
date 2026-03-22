@@ -41,12 +41,17 @@ function comp.search()
 
   local ok, count = pcall(vim.fn.searchcount, { maxcount = 9999 })
   if not ok then return ' ?/? ' end
-  if count.total == 0 or count.current == 0 then
+
+  local total   = count.total   or 0
+  local current = count.current or 0
+  local incomplete = count.incomplete or 0
+
+  if total == 0 or current == 0 then
     return ''
-  elseif count.incomplete == 1 then
-    return ' ' .. count.current .. '/? '
+  elseif incomplete == 1 then
+    return ' ' .. current .. '/? '
   else
-    return ' ' .. count.current .. '/' .. count.total .. ' '
+    return ' ' .. current .. '/' .. total .. ' '
   end
 end
 
