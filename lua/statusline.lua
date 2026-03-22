@@ -46,9 +46,11 @@ function comp.search()
   end
 end
 
+local counts = {}
+
 -- error count
-function comp.diagnostic_count()
-  local counts = {
+local diagnostic_count = function()
+  counts = {
     err = 0,
     warn = 0,
     info = 0,
@@ -66,20 +68,36 @@ function comp.diagnostic_count()
       counts.hint = counts.hint + 1
     end
   end
-  local output = ''
+  return counts
+end
+
+function comp.errors()
+  diagnostic_count()
   if counts.err > 0 then
-    output = output .. ' 󰅚 ' .. tostring(counts.err)
+    return '󰅚 ' .. tostring(counts.err) .. ' '
   end
+  return ''
+end
+
+function comp.warnings()
   if counts.warn > 0 then
-    output = output .. ' 󰀪 ' .. tostring(counts.warn)
+    return ' 󰀪 ' .. tostring(counts.warn) .. ' '
   end
+  return ''
+end
+
+function comp.info()
   if counts.info > 0 then
-    output = output .. ' 󰋽 ' .. tostring(counts.info)
+    return ' 󰋽 ' .. tostring(counts.info) .. ' '
   end
+  return ''
+end
+
+function comp.hints()
   if counts.hint > 0 then
-    output = output .. ' 󰌶 ' .. tostring(counts.hint)
+    return ' 󰌶 ' .. tostring(counts.hint) .. ' '
   end
-  return output
+  return ''
 end
 
 -- highlights
@@ -109,7 +127,7 @@ local mode = '%#StatusLineMode# %{mode()} %*'
 local gitinfo = '%#StatusLineGit#%{v:lua.status("git_branch")}%*'
 local tabinfo = '%#StatusLine#%{v:lua.status("tabnr")}'
 local fileinfo = ' %q%F%m%r'
-local diagnostics = ' %{v:lua.status("diagnostic_count")}'
+local diagnostics = ' %#DiagnosticError#%{v:lua.status("errors")}%*%#DiagnosticWarn#%{v:lua.status("warnings")}%*%#DiagnosticInfo#%{v:lua.status("info")}%*%#DiagnosticHint#%{v:lua.status("hints")}%*'
 local searchcount = '%{v:lua.status("search")}'
 local filetype = '%{&filetype} (%{&fileformat}) %*'
 local rowcol = '%#StatusLineMode# %l,%c '

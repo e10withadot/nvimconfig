@@ -23,7 +23,6 @@ local palette = {
   lgray = "#BABABA",
   red = "#EE5396",
   green = "#25be6a",
-  yellow = "#FFED66",
   blue = "#78A9FF",
   magenta = "#BE95FF",
   cyan = "#45C8F7",
@@ -32,9 +31,9 @@ local palette = {
   orange = "#FFB14A",
   pink = "#FF7EB6",
 
-  comment = "#6b7280",
+  comment = "#6B7280",
 
-  sel0 = "#3a3a3a",
+  sel0 = "#3A3A3A",
   sel1 = "#525253",
 }
 
@@ -83,7 +82,7 @@ hi("Search", { bg = palette.sel1 })
 hi("IncSearch", { bg = palette.sel1 })
 
 hi("Pmenu", { bg = palette.black })
-hi("PmenuSel", { bg = palette.sel0 })
+hi("PmenuSel", { bg = palette.sel0, gui = "bold" })
 
 hi("MatchParen", { fg = palette.orange, gui = "bold" })
 hi("CursorLineNr", { fg = palette.orange, gui = "bold" })
