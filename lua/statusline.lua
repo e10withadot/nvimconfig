@@ -20,7 +20,11 @@ function comp.git_branch()
   local fname = vim.api.nvim_buf_get_name(0)
   local filetype = vim.filetype.match({ buf = 0 })
   if fname == '' or filetype == nil then return '' end
+
   local dir = vim.fn.fnamemodify(fname, ":p:h")
+  if vim.fn.has("win32") == 1 then
+    dir = vim.fn.substitute(dir, "/", "\\", "g")
+  end
   if filetype == 'oil' then
     dir = dir:match('^oil://(.*)')
   end
@@ -125,7 +129,7 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 
 local mode = '%#StatusLineMode# %{mode()} %*'
 local gitinfo = '%#StatusLineGit#%{v:lua.status("git_branch")}%*'
-local tabinfo = '%#StatusLine#%{v:lua.status("tabnr")}'
+local tabinfo = '%{v:lua.status("tabnr")}'
 local fileinfo = ' %q%F%m%r'
 local diagnostics = ' %#DiagnosticError#%{v:lua.status("errors")}%*%#DiagnosticWarn#%{v:lua.status("warnings")}%*%#DiagnosticInfo#%{v:lua.status("info")}%*%#DiagnosticHint#%{v:lua.status("hints")}%*'
 local searchcount = '%{v:lua.status("search")}'
