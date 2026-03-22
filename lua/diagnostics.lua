@@ -1,5 +1,4 @@
--- DIAGNOSTIC CONFIG --
--- See :help vim.diagnostic.Opts
+-- diagnostic setup
 vim.diagnostic.config {
   severity_sort = true,
   float = { border = 'rounded', source = 'if_many' },

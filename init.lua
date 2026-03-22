@@ -2,6 +2,7 @@ require 'keymaps'
 require 'vim-opts'
 require 'commands'
 
+-- set colorscheme
 vim.cmd.colorscheme 'oxidefox'
 vim.g.have_nerd_font = true
 -- nerd fonts required from now on

@@ -50,7 +50,7 @@ local syntax = {
   preproc = palette.pink,
   statement = palette.magenta,
   string = palette.green,
-  type = palette.yellow,
+  type = palette.turq,
   variable = palette.white,
 }
 
