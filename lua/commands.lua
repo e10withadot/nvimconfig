@@ -1,10 +1,6 @@
--- Highlight when yanking (copying) text
+-- Highlight yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
+  callback = function() vim.hl.on_yank() end,
 })
 
 -- session management
@@ -32,4 +28,9 @@ vim.api.nvim_create_autocmd('TermOpen', {
   callback = function(args)
     vim.api.nvim_set_option_value('bufhidden', 'hide', { buf = args.buf })
   end,
+})
+
+-- update statusline when new diagnostics appear
+vim.api.nvim_create_autocmd('DiagnosticChanged', {
+  callback = function() vim.schedule(function() vim.cmd.redrawstatus() end) end,
 })
