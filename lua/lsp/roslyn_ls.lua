@@ -1,16 +1,33 @@
+local mason_root = require("mason.settings").current.install_root_dir
+local rzls_path = vim.fn.expand(mason_root .. "/packages/roslyn/libexec/.razorExtension")
+
 return {
+  filetypes = { "cs", "razor" },
   cmd = {
-    vim.fn.stdpath("data") .. "/mason/packages/roslyn/roslyn",
-    "--logLevel",
-    "Information",
-    '--extensionLogDirectory',
-    vim.fs.joinpath(vim.uv.os_tmpdir(), 'roslyn_ls/logs'),
+    "roslyn",
     "--stdio",
+    "--logLevel=Information",
+    "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+    "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+    "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+    "--extension=" .. vim.fs.joinpath(rzls_path, "Microsoft.VisualStudioCode.RazorExtension.dll"),
   },
   settings = {
     ["csharp|background_analysis"] = {
       dotnet_analyzer_diagnostics_scope = "openFiles",
       dotnet_compiler_diagnostics_scope = "openFiles",
+    },
+    ["csharp|razor"] = {
+      extension = {
+        ["{E12961B7-D4D4-49D8-B27B-78310B0B33CB}"] = {
+          enable = true,
+        },
+      },
+    },
+  },
+  capabilities = {
+    textDocument = {
+      semanticTokens = vim.empty_dict(),
     },
   },
 }
