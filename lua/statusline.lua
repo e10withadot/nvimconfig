@@ -114,6 +114,18 @@ vim.api.nvim_set_hl(0, 'StatusLine', { fg = '#DDDDDD', bg = '#333333' })
 vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#DDDDDD', bold = true })
 vim.api.nvim_set_hl(0, 'StatusLineGit', { fg = '#DDDDDD', bg = '#444444' })
 
+
+local mode = '%#StatusLineMode# %{mode()} %*'
+local gitinfo = '%#StatusLineGit#%{v:lua.status("git_branch")}%*'
+local tabinfo = '%{v:lua.status("tabnr")}'
+local fileinfo = ' %q%F%m%r'
+local diagnostics = ' %#DiagnosticError#%{v:lua.status("errors")}%*%#DiagnosticWarn#%{v:lua.status("warnings")}%*%#DiagnosticInfo#%{v:lua.status("info")}%*%#DiagnosticHint#%{v:lua.status("hints")}%*'
+local searchcount = '%{v:lua.status("search")}'
+local filetype = '%{&filetype} (%{&fileformat}) %*'
+local rowcol = '%#StatusLineMode# %l,%c '
+
+vim.o.statusline = mode .. gitinfo .. tabinfo .. fileinfo .. diagnostics .. ' %= ' .. searchcount .. filetype .. rowcol
+
 -- change color on mode change
 vim.api.nvim_create_autocmd("ModeChanged", {
   callback = function (event)
@@ -126,19 +138,16 @@ vim.api.nvim_create_autocmd("ModeChanged", {
       vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#00AADD', bold = true })
     elseif new_mode == 'R' then
       vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#DD3366', bold = true })
+    elseif new_mode == 't' then
+      vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#00FF00', bg = '#000000', bold = true })
     else
       vim.api.nvim_set_hl(0, 'StatusLineMode', { fg = '#333333', bg = '#DDDDDD', bold = true })
     end
+    vim.schedule(function() vim.cmd.redrawstatus() end)
   end
 })
 
-local mode = '%#StatusLineMode# %{mode()} %*'
-local gitinfo = '%#StatusLineGit#%{v:lua.status("git_branch")}%*'
-local tabinfo = '%{v:lua.status("tabnr")}'
-local fileinfo = ' %q%F%m%r'
-local diagnostics = ' %#DiagnosticError#%{v:lua.status("errors")}%*%#DiagnosticWarn#%{v:lua.status("warnings")}%*%#DiagnosticInfo#%{v:lua.status("info")}%*%#DiagnosticHint#%{v:lua.status("hints")}%*'
-local searchcount = '%{v:lua.status("search")}'
-local filetype = '%{&filetype} (%{&fileformat}) %*'
-local rowcol = '%#StatusLineMode# %l,%c '
-
-vim.o.statusline = mode .. gitinfo .. tabinfo .. fileinfo .. diagnostics .. ' %= ' .. searchcount .. filetype .. rowcol
+-- update statusline when new diagnostics appear
+vim.api.nvim_create_autocmd('DiagnosticChanged', {
+  callback = function() vim.schedule(function() vim.cmd.redrawstatus() end) end,
+})

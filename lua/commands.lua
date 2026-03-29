@@ -29,8 +29,3 @@ vim.api.nvim_create_autocmd('TermOpen', {
     vim.api.nvim_set_option_value('bufhidden', 'hide', { buf = args.buf })
   end,
 })
-
--- update statusline when new diagnostics appear
-vim.api.nvim_create_autocmd('DiagnosticChanged', {
-  callback = function() vim.schedule(function() vim.cmd.redrawstatus() end) end,
-})
