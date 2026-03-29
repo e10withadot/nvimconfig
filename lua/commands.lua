@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- save session on leave if exists
 vim.api.nvim_create_autocmd("VimLeave", {
   callback = function ()
-    if vim.fn.filereadable("Session.vim") == 1 then
+    if vim.fn.argc() == 0 and vim.fn.filereadable("Session.vim") == 1 then
       vim.cmd('mksession! Session.vim')
     end
   end,
