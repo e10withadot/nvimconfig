@@ -1,10 +1,7 @@
 local ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
 
 local treesitter_start = function(buf, lang)
-  -- highlighting
-  pcall(vim.treesitter.start, buf, lang)
-
-  -- indentation
+  pcall(vim.treesitter.language.add, lang, { bufnr = buf })
   vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 end
 

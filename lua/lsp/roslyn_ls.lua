@@ -25,9 +25,4 @@ return {
       },
     },
   },
-  capabilities = {
-    textDocument = {
-      semanticTokens = vim.empty_dict(),
-    },
-  },
 }
