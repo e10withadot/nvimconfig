@@ -3,7 +3,6 @@ return {
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {},
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
   lazy = false,
   config = function()
     local oil = require('oil')
@@ -11,6 +10,11 @@ return {
       default_file_explorer = true,
       view_options = {
         show_hidden = true,
+      },
+      columns = {
+        "permissions",
+        "size",
+        "mtime",
       },
     }
     vim.keymap.set('n', '-', oil.open, { desc = 'Open Oil' })
