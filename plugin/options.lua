@@ -30,6 +30,10 @@ vim.o.delcombine = true
 -- Decrease update time
 vim.o.updatetime = 250
 
+-- native completion settings
+vim.opt.completeopt = { 'menu', 'fuzzy', 'noinsert', 'popup' }
+vim.opt.shortmess:append 'c'
+
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300
 
