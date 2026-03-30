@@ -1,3 +1,10 @@
+# Requirements
+- Neovim 0.12+
+- git
+- fzf
+- ripgrep
+- tree-sitter cli
+
 # Setup
 `git clone` it to the Neovim config path (`.config/nvim` for Unix and `$LOCALAPPDATA\nvim` for Windows) and you're all set!
 
