@@ -1,3 +1,5 @@
+-- View neovim packages
+vim.api.nvim_create_user_command('Pack', function () vim.pack.update(nil, { offline = true }) end, {})
 -- Update neovim packages
 vim.api.nvim_create_user_command('PackUpdate', function () vim.pack.update() end, {})
 
@@ -6,7 +8,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank() end,
 })
 
--- session management
 -- session options
 vim.opt.sessionoptions = "help,options,resize,winpos,curdir,folds,buffers,blank"
 -- load session on startup if exists

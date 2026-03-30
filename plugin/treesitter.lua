@@ -1,6 +1,16 @@
+-- when nvim-treesitter updates
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function (ev)
+    local name, kind = ev.data.spec.name, ev.data.spec.kind
+    if name == 'nvim-treesitter' and kind == 'update' then
+      vim.cmd('TSUpdate')
+    end
+  end
+})
+
 vim.pack.add {
   {
-    src = 'https://www.github.com/nvim-treesitter/nvim-treesitter', -- treesitter parse repo
+    src = 'https://www.github.com/nvim-treesitter/nvim-treesitter', -- treesitter parser repo
     version = 'main'
   }
 }
@@ -31,15 +41,6 @@ local treesitter_install = function(buf, lang)
   end
 end
 
--- when nvim-treesitter updates
-vim.api.nvim_create_autocmd('PackChanged', {
-  callback = function (ev)
-    local name, kind = ev.data.spec.name, ev.data.spec.kind
-    if name == 'nvim-treesitter' and kind == 'update' then
-      ts.update()
-    end
-  end
-})
 
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('treesitter.setup', {}),
@@ -60,6 +61,6 @@ vim.api.nvim_create_user_command('TSStart', function()
   if lang then
     treesitter_start(buf)
   else
-    vim.notify('Language not available.', vim.log.levels.ERROR, {})
+    vim.notify('Language not available.', vim.log.levels.WARN, {})
   end
 end, {})

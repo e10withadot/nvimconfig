@@ -2,6 +2,8 @@ vim.pack.add {
   'https://www.github.com/neovim/nvim-lspconfig', -- lsp defaults
   'https://www.github.com/mason-org/mason.nvim' -- lsp repo
 }
+-- a separate column for signs
+vim.o.signcolumn = 'yes'
 -- diagnostic options
 vim.diagnostic.config {
   severity_sort = true,
