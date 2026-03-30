@@ -10,7 +10,11 @@
 
 # Structure
 **init.lua** is where all the important options that should be loaded first are.
+
 **plugin/** is where all added functionalities that can be loaded in parallel reside.
+
 **colors/** keeps my colorscheme, a custom version of carbonfox called "oxidefox".
+
 **lsp/** keeps my language server configs.
+
 This structure ensures that if one module breaks, the entire system doesn't. Unless something is wrong with the **init.lua**, an error in a single file will only affect that one file.
