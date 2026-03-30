@@ -1,3 +1,10 @@
+-- Don't show mode
+vim.o.showmode = false
+-- Don't show search count
+vim.opt.shortmess:append 'S'
+-- Don't show tabline
+vim.o.showtabline = 0
+
 -- functions
 local comp = {}
 
@@ -20,8 +27,11 @@ function comp.git_branch()
   local fname = vim.api.nvim_buf_get_name(0)
   local filetype = vim.filetype.match({ buf = 0 })
   if fname == '' or filetype == nil then return '' end
-
   local dir = vim.fn.fnamemodify(fname, ":p:h")
+  if vim.fn.isdirectory(dir) == 0 then
+    return ''
+  end
+
   if vim.fn.has("win32") == 1 then
     dir = vim.fn.substitute(dir, "/", "\\", "g")
   end

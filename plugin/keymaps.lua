@@ -1,6 +1,5 @@
--- Set leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- remove keymap timeout
+vim.o.timeout = false
 
 -- Clear highlights on search when pressing <Ctrl-c> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
