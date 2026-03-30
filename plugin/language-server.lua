@@ -15,13 +15,11 @@ vim.diagnostic.config {
 }
 
 require('mason').setup {
-  opts = {
-    ui = {
-      icons = {
-        package_installed = '✓',
-        package_pending = '➜',
-        package_uninstalled = '✗',
-      },
+  ui = {
+    icons = {
+      package_installed = 'I',
+      package_pending = '...',
+      package_uninstalled = 'X',
     },
   },
   -- roslyn has a third-party repo
