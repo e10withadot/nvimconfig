@@ -47,14 +47,17 @@ local get_installed_package_specs = function ()
 end
 
 -- LSP configuration (lives in lsp/*)
-local names = vim.fn.glob(vim.fn.stdpath("config") .. "/lsp/*.lua", false, true)
+local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
+package.path = package.path .. ";" .. lsp_dir .. "/?.lua"
+
+local names = vim.fn.readdir(lsp_dir, [[v:val =~ '\.lua$']])
 for _, abs_name in ipairs(names) do
   local name = vim.fn.fnamemodify(abs_name, ':t:r')
-  local ok, settings = pcall(require, 'lsp.' .. name)
+  local ok, settings = pcall(require, name)
 
   -- catch config errors
   if not ok then
-    vim.notify("Failed to load: lsp." .. name, vim.log.levels.WARN)
+    vim.notify("Failed to load language server: " .. name, vim.log.levels.WARN)
   elseif type(settings) ~= "table" then
     vim.notify(name .. " did not return table (discarded)", vim.log.levels.WARN)
   else
