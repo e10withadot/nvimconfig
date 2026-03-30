@@ -16,7 +16,7 @@ end
 -- tab number
 function comp.tabnr()
   if vim.fn.tabpagenr '$' ~= 1 then
-    return '  󰓩 ' .. vim.fn.tabpagenr()
+    return '  #' .. vim.fn.tabpagenr()
   else
     return ''
   end
@@ -42,7 +42,7 @@ function comp.git_branch()
   local res = vim.system({ "git", "branch", "--show-current" }, { cwd = dir, text = true }):wait()
   if res.code ~= 0 then return '' end
   local branch = res.stdout:gsub("%s+", "")
-  return '  ' .. branch .. ' '
+  return ' ' .. branch .. ' '
 end
 
 -- search count
@@ -50,7 +50,7 @@ function comp.search()
   if vim.fn.eval('v:hlsearch') == 0 then return '' end
 
   local ok, count = pcall(vim.fn.searchcount, { maxcount = 9999 })
-  if not ok then return ' ?/? ' end
+  if not ok then return '?/?' end
 
   local total   = count.total   or 0
   local current = count.current or 0
@@ -59,9 +59,9 @@ function comp.search()
   if total == 0 or current == 0 then
     return ''
   elseif incomplete == 1 then
-    return ' ' .. current .. '/? '
+    return current .. '/?'
   else
-    return ' ' .. current .. '/' .. total .. ' '
+    return current .. '/' .. total
   end
 end
 
@@ -93,28 +93,28 @@ end
 function comp.errors()
   diagnostic_count()
   if counts.err > 0 then
-    return '󰅚 ' .. tostring(counts.err) .. ' '
+    return ' E' .. tostring(counts.err) .. ' '
   end
   return ''
 end
 
 function comp.warnings()
   if counts.warn > 0 then
-    return ' 󰀪 ' .. tostring(counts.warn) .. ' '
+    return ' W' .. tostring(counts.warn) .. ' '
   end
   return ''
 end
 
 function comp.info()
   if counts.info > 0 then
-    return ' 󰋽 ' .. tostring(counts.info) .. ' '
+    return ' I' .. tostring(counts.info) .. ' '
   end
   return ''
 end
 
 function comp.hints()
   if counts.hint > 0 then
-    return ' 󰌶 ' .. tostring(counts.hint) .. ' '
+    return ' H' .. tostring(counts.hint) .. ' '
   end
   return ''
 end
@@ -130,7 +130,7 @@ local gitinfo = '%#StatusLineGit#%{v:lua.status("git_branch")}%*'
 local tabinfo = '%{v:lua.status("tabnr")}'
 local fileinfo = ' %q%F%m%r'
 local diagnostics = ' %#DiagnosticError#%{v:lua.status("errors")}%*%#DiagnosticWarn#%{v:lua.status("warnings")}%*%#DiagnosticInfo#%{v:lua.status("info")}%*%#DiagnosticHint#%{v:lua.status("hints")}%*'
-local searchcount = '%{v:lua.status("search")}'
+local searchcount = '%{v:lua.status("search")} '
 local filetype = '%{&filetype} (%{&fileformat}) %*'
 local rowcol = '%#StatusLineMode# %l,%c '
 
