@@ -9,24 +9,31 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- session options
-vim.opt.sessionoptions = "help,options,resize,winpos,curdir,folds,buffers,blank"
--- load session on startup if exists
+vim.opt.sessionoptions = "help,options,resize,winpos,curdir,blank,tabpages,winsize"
+-- autosave sessions
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    local path = vim.fn.getcwd() .. "/Session.vim"
+    if vim.fn.argc() == 0 and #vim.api.nvim_list_tabpages() > 0 then
+      vim.cmd('mksession! ' .. path)
+    end
+  end,
+  nested = true,
+})
+-- autoload sessions
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    if vim.fn.argc() == 0 and vim.fn.filereadable("Session.vim") == 1 then
-      vim.cmd("source Session.vim")
-      vim.cmd("silent! filetype detect")
+    local path = vim.fn.getcwd() .. "/Session.vim"
+    if vim.fn.argc() == 0 and vim.fn.filereadable(path) == 1 then
+      vim.api.nvim_buf_set_name(0, '')
+      vim.cmd("silent! source " .. path)
+      vim.defer_fn(function()
+        vim.cmd("silent! filetype detect")
+        vim.cmd("syntax on | redraw")
+      end, 100)
     end
   end,
-})
-
--- save session on leave if exists
-vim.api.nvim_create_autocmd("VimLeave", {
-  callback = function ()
-    if vim.fn.argc() == 0 and vim.fn.filereadable("Session.vim") == 1 then
-      vim.cmd('mksession! Session.vim')
-    end
-  end,
+  nested = true,
 })
 
 -- terminal buffers are hidden, not deleted
