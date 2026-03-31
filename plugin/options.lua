@@ -31,6 +31,8 @@ vim.o.delcombine = true
 vim.o.updatetime = 250
 
 -- native completion settings
+vim.opt.autocomplete = true
+vim.opt.complete = 'o,.,w,b,u'
 vim.opt.completeopt = { 'menu', 'fuzzy', 'noinsert', 'popup' }
 vim.opt.shortmess:append 'c'
 
