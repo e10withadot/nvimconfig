@@ -14,7 +14,7 @@ vim.opt.sessionoptions = "help,options,resize,winpos,curdir,blank,tabpages,winsi
 vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = function()
     local path = vim.fn.getcwd() .. "/Session.vim"
-    if vim.fn.argc() == 0 and #vim.api.nvim_list_tabpages() > 0 then
+    if vim.fn.argc() == 0 and vim.fn.filereadable(path) == 1 then
       vim.cmd('mksession! ' .. path)
     end
   end,

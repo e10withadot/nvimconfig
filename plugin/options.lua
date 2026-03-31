@@ -31,9 +31,8 @@ vim.o.delcombine = true
 vim.o.updatetime = 250
 
 -- native completion settings
-vim.opt.autocomplete = true
-vim.opt.complete = 'o,.,w,b,u'
-vim.opt.completeopt = { 'menu', 'fuzzy', 'noinsert', 'popup' }
+vim.opt.complete = 'o,.^10,w^5,b^5,u^5'
+vim.opt.completeopt = 'menu,fuzzy,noinsert,popup'
 vim.opt.shortmess:append 'c'
 
 -- Decrease mapped sequence wait time
