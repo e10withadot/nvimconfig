@@ -24,16 +24,20 @@ vim.keymap.set("i", "'", "''<Left>")
 vim.keymap.set("i", "`", "``<Left>")
 
 -- paste and keep
-vim.keymap.set('x', '<leader>p', '"_dP')
+vim.keymap.set('x', ' p', '"_dP')
+
+-- easy visual indent
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
 
 -- replace word below cursor
-vim.keymap.set('n', '<leader>rh', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('n', ' rh', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- replace all instances of word below cursor
-vim.keymap.set('n', '<leader>ra', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('n', ' ra', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- undotree
-vim.cmd('packadd nvim.undotree')
-vim.keymap.set('n', '<leader>u', require('undotree').open)
+vim.cmd.packadd 'nvim.undotree'
+vim.keymap.set('n', ' u', require('undotree').open)
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

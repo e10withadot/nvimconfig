@@ -1,9 +1,5 @@
--- Set leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- colorscheme
-vim.cmd.colorscheme 'oxidefox'
+pcall(vim.cmd.colorscheme, 'oxidefox')
 vim.o.termguicolors = true
 
 -- line numbers

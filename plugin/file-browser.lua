@@ -19,6 +19,6 @@ oil.setup {
 }
 vim.keymap.set('n', '-', oil.open, { desc = 'Open Oil' })
 vim.keymap.set('n', '_', function ()
-  vim.cmd.tabnew()
+  vim.api.nvim_open_tabpage(0, true, {})
   oil.open()
 end, { desc = 'Open Oil in new tab' })

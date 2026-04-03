@@ -27,16 +27,13 @@ vim.o.termbidi = true
 -- remove parts of a combined character (nikud)
 vim.o.delcombine = true
 
--- Decrease update time
-vim.o.updatetime = 250
+-- disable swap file
+vim.o.swapfile = false
 
 -- native completion settings
-vim.opt.complete = 'o,.^10,w^5,b^5,u^5'
+vim.opt.complete = '.,w,b,u,o'
 vim.opt.completeopt = 'menu,fuzzy,noinsert,popup'
 vim.opt.shortmess:append 'c'
-
--- Decrease mapped sequence wait time
-vim.o.timeoutlen = 300
 
 -- Configure how new splits should be opened
 vim.o.splitright = true

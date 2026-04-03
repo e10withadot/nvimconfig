@@ -28,15 +28,15 @@ function comp.git_branch()
   local filetype = vim.filetype.match({ buf = 0 })
   if fname == '' or filetype == nil then return '' end
   local dir = vim.fn.fnamemodify(fname, ":p:h")
-  if vim.fn.isdirectory(dir) == 0 then
-    return ''
-  end
 
   if vim.fn.has("win32") == 1 then
     dir = vim.fn.substitute(dir, "/", "\\", "g")
   end
   if filetype == 'oil' then
     dir = dir:match('^oil://(.*)')
+  end
+  if vim.fn.isdirectory(dir) == 0 then
+    return ''
   end
 
   local res = vim.system({ "git", "branch", "--show-current" }, { cwd = dir, text = true }):wait()

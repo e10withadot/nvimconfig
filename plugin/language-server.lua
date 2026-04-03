@@ -21,7 +21,7 @@ require('mason').setup {
     icons = {
       package_installed = 'I',
       package_pending = '...',
-      package_uninstalled = 'X',
+      package_uninstalled = 'x',
     },
   },
   -- roslyn has a third-party repo
@@ -65,7 +65,7 @@ for _, abs_name in ipairs(names) do
   end
 end
 
--- enable all installed LSPs
+-- enable all installed LSPs (mason to lspconfig bridge)
 local installed_specs = get_installed_package_specs()
 local installed_lsp_names = vim.iter(installed_specs):fold({}, function(acc, spec)
   local lsp_name = spec.neovim and spec.neovim.lspconfig
