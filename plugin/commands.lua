@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- session options
-vim.opt.sessionoptions = "help,options,resize,winpos,curdir,blank,tabpages,winsize"
+vim.opt.sessionoptions = "help,localoptions,resize,winpos,curdir,blank,tabpages,winsize"
 -- autosave sessions
 vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = function()
@@ -35,6 +35,25 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
   nested = true,
 })
+
+-- quickfix closes on enter
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "<CR>", "<CR>:cclose<CR>", { buffer = true, silent = true })
+  end,
+})
+
+-- the cooler grep
+vim.api.nvim_create_user_command('Grep', function(opts)
+  if opts.nargs ~= '1' then
+    vim.notify('Grep accepts one argument.', vim.log.levels.ERROR, {})
+    return
+  end
+  local word = opts.fargs[1]
+  vim.cmd('silent grep! ' .. word)
+  vim.cmd.cwin()
+end, { nargs = 1 })
 
 -- terminal buffers are hidden, not deleted
 vim.api.nvim_create_autocmd('TermOpen', {

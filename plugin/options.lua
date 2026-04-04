@@ -22,6 +22,9 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Enable fuzzy finding within directories using :find
+vim.opt.path:append '**'
+
 -- enable if terminal supports bidi
 vim.o.termbidi = true
 -- remove parts of a combined character (nikud)

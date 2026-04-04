@@ -30,6 +30,9 @@ vim.keymap.set('x', ' p', '"_dP')
 vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 
+-- new tab
+vim.keymap.set('n', ' t', vim.cmd.tabnew)
+
 -- replace word below cursor
 vim.keymap.set('n', ' rh', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- replace all instances of word below cursor
@@ -38,6 +41,24 @@ vim.keymap.set('n', ' ra', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]
 -- undotree
 vim.cmd.packadd 'nvim.undotree'
 vim.keymap.set('n', ' u', require('undotree').open)
+
+-- toggle quickfix
+vim.keymap.set('n', ' l', function ()
+  if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+    vim.cmd.cclose()
+  else
+    vim.cmd.cwindow()
+  end
+end)
+-- next quickfix item
+vim.keymap.set('n', ' n', vim.cmd.cnext)
+-- previous quickfix item
+vim.keymap.set('n', ' N', vim.cmd.cprev)
+-- grep for cursor word
+vim.keymap.set('n', ' 8', function()
+  vim.cmd('silent grep! ' .. vim.fn.expand('<cword>'))
+  vim.cmd.cwin()
+end)
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
