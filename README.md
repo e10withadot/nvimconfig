@@ -1,7 +1,7 @@
 # Requirements
 - Neovim 0.12+
+- a C compiler (`MSVC++`, `llvm`, or `gcc`)
 - git
-- fzf
 - ripgrep
 - tree-sitter cli
 
@@ -17,4 +17,4 @@
 
 `lsp/` keeps my language server configs.
 
-This structure ensures that if one module breaks, the entire system doesn't. Unless something is wrong with the `init.lua`, an error in a single file will only affect that one file.
+This structure ensures that if one module breaks, the entire system doesn't. Unless something is wrong with the `init.lua`, it only affects what's in the `init.lua`.

@@ -19,11 +19,6 @@ local ts = require('nvim-treesitter')
 local ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
 ts.install(ensure_installed)
 
-local treesitter_start = function(buf, lang)
-  pcall(vim.treesitter.start, buf, lang)
-  vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-end
-
 local treesitter_install = function(buf, lang)
   local installed = ts.get_installed()
   if not vim.list_contains(installed, lang) then
@@ -33,7 +28,7 @@ local treesitter_install = function(buf, lang)
       return
     end
   end
-  treesitter_start(buf, lang)
+  pcall(vim.treesitter.start, buf, lang)
 end
 
 -- automatically install and start treesitter
@@ -46,7 +41,7 @@ vim.api.nvim_create_autocmd('FileType', {
     if not vim.treesitter.language.add(lang) then
       treesitter_install(event.buf, lang)
     end
-    treesitter_start(event.buf, lang)
+    pcall(vim.treesitter.start, event.buf, lang)
   end,
 })
 
@@ -55,7 +50,7 @@ vim.api.nvim_create_user_command('TSStart', function()
   local filetype = vim.bo.filetype
   local lang = vim.treesitter.language.get_lang(filetype) or filetype
   if lang then
-    treesitter_start(buf, lang)
+    pcall(vim.treesitter.start, buf, lang)
   else
     vim.notify('Language not available.', vim.log.levels.WARN, {})
   end

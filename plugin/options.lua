@@ -34,7 +34,7 @@ vim.o.delcombine = true
 vim.o.swapfile = false
 
 -- native completion settings
-vim.opt.complete = '.,w,b,u,o'
+vim.opt.complete = 'o,.,w,b'
 vim.opt.completeopt = 'menu,fuzzy,noinsert,popup'
 vim.opt.shortmess:append 'c'
 
@@ -48,9 +48,6 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- preview substitutions live
 vim.o.inccommand = 'split'
-
--- Show which line your cursor is on
-vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
