@@ -1,9 +1,6 @@
 -- remove keymap timeout
 vim.o.timeout = false
 
--- Clear highlights on search when pressing <Ctrl-c> in normal mode
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
 -- Put cursor in middle during strong relative jumps
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
@@ -31,7 +28,10 @@ vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 
 -- new tab
-vim.keymap.set('n', ' t', vim.cmd.tabnew)
+vim.keymap.set('n', ' t', function ()
+ vim.api.nvim_open_tabpage(0, true, {})
+end
+)
 
 -- replace word below cursor
 vim.keymap.set('n', ' rh', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

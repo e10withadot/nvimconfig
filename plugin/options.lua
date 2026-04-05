@@ -24,6 +24,8 @@ vim.o.smartcase = true
 
 -- Enable fuzzy finding within directories using :find
 vim.opt.path:append '**'
+-- disable search highlights post-search
+vim.o.hlsearch = false
 
 -- enable if terminal supports bidi
 vim.o.termbidi = true
@@ -34,9 +36,8 @@ vim.o.delcombine = true
 vim.o.swapfile = false
 
 -- native completion settings
-vim.opt.complete = 'o,.,w,b'
-vim.opt.completeopt = 'menu,fuzzy,noinsert,popup'
-vim.opt.shortmess:append 'c'
+vim.o.complete = 'o,.,b'
+vim.o.completeopt = 'menu,fuzzy,noinsert,popup'
 
 -- Configure how new splits should be opened
 vim.o.splitright = true
