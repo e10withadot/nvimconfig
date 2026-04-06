@@ -1,6 +1,9 @@
 -- remove keymap timeout
 vim.o.timeout = false
 
+-- remove search highlight
+vim.keymap.set('n', '<Esc>', ':nohlsearch')
+
 -- Put cursor in middle during strong relative jumps
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')

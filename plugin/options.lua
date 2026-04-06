@@ -24,8 +24,6 @@ vim.o.smartcase = true
 
 -- Enable fuzzy finding within directories using :find
 vim.opt.path:append '**'
--- disable search highlights post-search
-vim.o.hlsearch = false
 
 -- enable if terminal supports bidi
 vim.o.termbidi = true
