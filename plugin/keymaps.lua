@@ -2,7 +2,7 @@
 vim.o.timeout = false
 
 -- remove search highlight
-vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', vim.cmd.nohlsearch)
 
 -- Put cursor in middle during strong relative jumps
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')

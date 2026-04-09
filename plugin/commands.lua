@@ -43,6 +43,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "<CR>", "<CR>:cclose<CR>", { buffer = true, silent = true })
   end,
 })
+-- quickfix closes on esc
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "<Esc>", vim.cmd.cclose, { buffer = true, silent = true })
+  end,
+})
 
 -- the cooler grep
 vim.api.nvim_create_user_command('Grep', function(opts)
