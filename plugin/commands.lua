@@ -36,14 +36,13 @@ vim.api.nvim_create_autocmd("VimEnter", {
   nested = true,
 })
 
--- quickfix closes on enter
+-- quickfix closes on enter and esc
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "qf",
   callback = function()
     vim.keymap.set("n", "<CR>", "<CR>:cclose<CR>", { buffer = true, silent = true })
   end,
 })
--- quickfix closes on esc
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "qf",
   callback = function()
@@ -52,7 +51,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- the cooler grep
-vim.api.nvim_create_user_command('Grep', function(opts)
+vim.api.nvim_create_user_command('G', function(opts)
   if opts.nargs ~= '1' then
     vim.notify('Grep accepts one argument.', vim.log.levels.ERROR, {})
     return
