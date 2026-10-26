@@ -1,6 +1,6 @@
 # Requirements
 - Neovim 0.12+
-- a C compiler (`MSVC++`, `llvm`, or `gcc`)
+- a C compiler (`cl.exe`, `llvm`, or `gcc`)
 - git
 - ripgrep
 - tree-sitter cli
@@ -17,7 +17,7 @@
 
 `lsp/` keeps my language server configs.
 
-This structure ensures that if one module breaks, the entire system doesn't. Unless something is wrong with the `init.lua`, it only affects what's in the `init.lua`.
+This structure ensures that if one module breaks, the entire system doesn't. If something is wrong with the `init.lua`, it only affects what's in the `init.lua`.
 
 # Mandatory disclosure
 This config could not have been possible without [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) and [edeneast/nightfox.nvim](https://github.com/edeneast/nightfox.nvim). The following are their licenses:
